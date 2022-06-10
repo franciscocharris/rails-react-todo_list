@@ -8,7 +8,7 @@ module V1
       return render json: { errors: @user.errors.full_messages }, status: 422 unless @user.save
 
       @user.create_default_cards
-      token = JwtServices::Encoder.call(id: @user.id, cards: @user.cards.to_a)
+      token = JwtServices::Encoder.call(id: @user.id)
       render json: { token: }, status: 200
     end
 
