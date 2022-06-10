@@ -3,11 +3,12 @@
 module V1
   class SessionsController < ApplicationController
     def signup
-      byebug
+      # byebug
       @user = User.new(user_params)
       return render json: { errors: @user.errors.full_messages }, status: 422 unless @user.save
 
-      token = JwtServices::Encoder.call(id: @user.id)
+      @user.create_default_cards
+      token = JwtServices::Encoder.call(id: @user.id, cards: @user.cards.to_a)
       render json: { token: }, status: 200
     end
 
