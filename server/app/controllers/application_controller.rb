@@ -3,6 +3,7 @@
 class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound, with: :error_handler
   rescue_from JWT::DecodeError, with: :error_handler
+  rescue_from ActiveRecord::RecordInvalid, with: :no_valid
   before_action :authorize_request, except: %i[signup login]
 
   def authorize_request
@@ -18,5 +19,9 @@ class ApplicationController < ActionController::API
 
   def error_handler(err)
     render json: { errors: err.message }, status: 401
+  end
+
+  def no_valid(err)
+    render json: { errors: err.record.errors.full_messages }, status: 422
   end
 end

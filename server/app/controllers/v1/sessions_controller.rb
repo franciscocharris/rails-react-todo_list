@@ -17,7 +17,7 @@ module V1
       return render json: { error: 'unauthorized' }, status: 401 unless @user&.authenticate(params[:password])
 
       token = JwtServices::Encoder.call(id: @user.id)
-      render json: { token:, user: @user }, status: 200
+      render json: { token: }, status: 200
     end
 
     private
