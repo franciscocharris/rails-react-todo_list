@@ -2,7 +2,6 @@
 
 module JwtServices
   class Encoder < ApplicationService
-
     def initialize(payload)
       @payload = payload
     end

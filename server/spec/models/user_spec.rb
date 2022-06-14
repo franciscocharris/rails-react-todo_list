@@ -9,7 +9,10 @@ RSpec.describe User, type: :model do
     %i[first_name last_name email password].each do |field|
       it { is_expected.to validate_presence_of(field) }
     end
+    it { is_expected.to be_valid }
   end
 
-  it { is_expected.to be_valid }
+  describe 'Associations' do
+    it { is_expected.to have_many(:cards) }
+  end
 end
