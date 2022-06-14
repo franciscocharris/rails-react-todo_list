@@ -31,5 +31,11 @@ RSpec.describe 'v1/sessions_controller', type: :request do
       it { expect(json['token']).to be_an_instance_of String }
       it { expect { JwtServices::Encoder.call(json['token']) }.not_to raise_error }
     end
+
+    context "when the credentials are incorrect" do
+      before { post '/v1/login', params: { email: 'not_exists@gmail.com', password: '' } }
+      it { expect(response).to have_http_status 401 }
+      it { expect(json['errors']).to eql('wrong credentials') }
+    end
   end
 end
