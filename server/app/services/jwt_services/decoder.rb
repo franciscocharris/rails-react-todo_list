@@ -2,7 +2,6 @@
 
 module JwtServices
   class Decoder < ApplicationService
-
     def initialize(token)
       @token = token
     end

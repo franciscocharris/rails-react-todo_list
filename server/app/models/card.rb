@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Card < ApplicationRecord
   belongs_to :user
   validates :name, :n_position, presence: true
