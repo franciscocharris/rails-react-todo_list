@@ -3,7 +3,7 @@ import Axios from 'axios'
 import { useState } from 'react'
 
 export function SignUp() {
-  const URL = 'http://localhost:3000/v1/signup'
+  // const URL = 'http://localhost:3000/v1/signup'
   // const TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6Mn0.VE73XwpT1UCjEsPkb80uphw6Jb7CoHLY720wFBNp618'
 
   const [data, setData] = useState({
