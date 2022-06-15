@@ -1,11 +1,21 @@
 import '../index.css'
 import Axios from 'axios'
 import { useState } from 'react'
+import axios from 'axios'
 
 export function SignUp() {
-  // const URL = 'http://localhost:3000/v1/signup'
-  // const TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6Mn0.VE73XwpT1UCjEsPkb80uphw6Jb7CoHLY720wFBNp618'
+  const URL = 'http://localhost:3000/v1/signup'
+  const TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6M30.4WRvlxrU13E3629Kw8e4Q-akV_4EPZlUsHLeiGMBU2g'
 
+  axios.interceptors.request.use(
+    config => {
+      config.headers.authorization = `Bearer ${TOKEN}`
+      return config
+    },
+    err => {
+      return Promise.reject(err)
+    }
+  )
   const [data, setData] = useState({
     first_name:"",
     last_name:"",
@@ -13,26 +23,30 @@ export function SignUp() {
     password:""
   })
 
-  // function submit(e){
-  //   e.preventDefault()
-  //   Axios.post(URL, {
-  //     first_name: data.first_name,
-  //     last_name: data.last_name,
-  //     email: data.email,
-  //     password: data.password
-  //   })
-  //   .then(response => {
-  //     console.log(response.data)
-  //   })
-  // }
+  function submit(e){
+    e.preventDefault()
+
+    Axios.post(URL, {
+      first_name: data.first_name,
+      last_name: data.last_name,
+      email: data.email,
+      password: data.password
+    })
+    .then(response => {
+      console.log(response.data)
+    })
+    .catch(error => {
+      console.log(error.message)
+    })
+  }
 
   function handle(e){
     const newData = {...data}
     newData[e.target.id] = e.target.value
     setData(newData)
-    console.log('data', newData)
+    // console.log('data', newData)
   }
-
+ 
   return(
     <>
       <div className="container">
