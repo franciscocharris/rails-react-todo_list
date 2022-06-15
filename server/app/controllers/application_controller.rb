@@ -1,16 +1,27 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+  #
+  class AutorizationError < StandardError; end
+  class HeaderNotSent < AutorizationError; end
+  class InvalidHeader < AutorizationError; end
+  #
+
   class AuthenticationError < StandardError; end
 
+  #
+  rescue_from HeaderNotSent, with: :not_header
+  rescue_from InvalidHeader, with: :invalid_header
+  #
+
   rescue_from AuthenticationError, with: :w_credentials
-  rescue_from ActiveRecord::RecordNotFound, with: :error_handler
   rescue_from JWT::DecodeError, with: :error_handler
+  rescue_from ActiveRecord::RecordNotFound, with: :error_handler
   rescue_from ActiveRecord::RecordInvalid, with: :no_valid
   before_action :authorize_request, except: %i[signup login]
 
   def authorize_request
-    return render json: { errors: 'authentication header wasn`t sent' } unless request.headers.key?('Authorization')
+    validate_request_header(request)
 
     header = request.headers[:Authorization]
     header = header.split(' ').last
@@ -19,6 +30,22 @@ class ApplicationController < ActionController::API
   end
 
   private
+
+  def validate_request_header(request)
+    raise HeaderNotSent unless request.headers.key?('Authorization')
+
+    raise InvalidHeader unless request.headers[:Authorization].include?('Bearer ')
+  end
+
+  #
+  def invalid_header
+    render json: { errors: 'authentication header has invalid format' }
+  end
+
+  def not_header
+    render json: { errors: 'authentication header wasn`t sent' }
+  end
+  #
 
   def w_credentials
     render json: { errors: 'wrong credentials' }, status: 401

@@ -3,11 +3,9 @@
 FactoryBot.define do
   factory :card do
     name { Faker::Lorem.word }
-    n_position { 1 }
+    sequence :n_position do |n|
+      n
+    end
     user_id { create(:user).id }
-  end
-
-  trait :user1 do
-    user_id { 1 }
   end
 end

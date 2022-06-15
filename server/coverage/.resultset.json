@@ -1,6 +1,85 @@
 {
   "RSpec": {
     "coverage": {
+      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/controllers/v1/cards_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          0,
+          null,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/controllers/application_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          0,
+          null,
+          null,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
       "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/models/user.rb": {
         "lines": [
           null,
@@ -12,8 +91,8 @@
           1,
           1,
           null,
-          12,
-          12,
+          1,
+          2,
           1,
           null,
           null,
@@ -23,8 +102,8 @@
           null,
           null,
           1,
-          11,
-          33,
+          1,
+          3,
           null,
           null,
           null
@@ -50,74 +129,6 @@
           null
         ]
       },
-      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/controllers/v1/sessions_controller.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          1,
-          4,
-          4,
-          3,
-          3,
-          null,
-          null,
-          1,
-          5,
-          5,
-          null,
-          3,
-          3,
-          null,
-          null,
-          1,
-          null,
-          1,
-          4,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/controllers/application_controller.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          1,
-          null,
-          1,
-          2,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null
-        ]
-      },
       "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/services/jwt_services/encoder.rb": {
         "lines": [
           null,
@@ -125,11 +136,11 @@
           1,
           1,
           1,
-          7,
+          1,
           null,
           null,
           1,
-          7,
+          1,
           null,
           null,
           null
@@ -141,7 +152,25 @@
           null,
           1,
           1,
-          7,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/services/jwt_services/decoder.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          0,
+          null,
           null,
           null
         ]
@@ -170,20 +199,13 @@
         "branches": {
         }
       },
-      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/controllers/v1/cards_controller.rb": {
+      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/controllers/v1/sessions_controller.rb": {
         "lines": [
           null,
           null,
           0,
           0,
           0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
           0,
           0,
           0,
@@ -198,10 +220,6 @@
           0,
           0,
           null,
-          0,
-          null,
-          0,
-          0,
           0,
           null,
           0,
@@ -318,28 +336,8 @@
         ],
         "branches": {
         }
-      },
-      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/services/jwt_services/decoder.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
       }
     },
-    "timestamp": 1655241263
+    "timestamp": 1655313176
   }
 }

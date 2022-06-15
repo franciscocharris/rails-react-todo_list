@@ -6,7 +6,7 @@ module V1
       @user = User.new(user_params)
       @user.save!
       token = JwtServices::Encoder.call(id: @user.id)
-      render json: { token: }, status: 200
+      render json: { token: token }, status: 200
     end
 
     def login
@@ -14,7 +14,7 @@ module V1
       raise AuthenticationError unless @user&.authenticate(params[:password])
 
       token = JwtServices::Encoder.call(id: @user.id)
-      render json: { token: }, status: 200
+      render json: { token: token }, status: 200
     end
 
     private
