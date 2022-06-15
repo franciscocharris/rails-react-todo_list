@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   namespace :v1 do
     post 'signup', to: 'sessions#signup'
     post 'login', to: 'sessions#login'
-    resources :cards
+    resources :lists
   end
   get '/*a', to: 'application#not_found'
 end

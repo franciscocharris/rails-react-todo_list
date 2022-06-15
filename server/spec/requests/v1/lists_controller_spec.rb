@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe V1::CardsController, type: :request do
+RSpec.describe V1::ListsController, type: :request do
   subject { described_class }
   let!(:user) { create(:user, :to_logg) }
   let!(:token_user) { JwtServices::Encoder.call(id: user.id) }

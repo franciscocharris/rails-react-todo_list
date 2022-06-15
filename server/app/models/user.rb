@@ -2,24 +2,24 @@
 
 class User < ApplicationRecord
   has_secure_password
-  has_many :cards, dependent: :destroy
+  has_many :lists, dependent: :destroy
   validates :first_name, :last_name, :email, :password, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
   validates :password,
             length: { minimum: 6 },
             if: -> { new_record? || !password.nil? }
   before_save { self.email = email.downcase.delete(' ') }
-  after_save :create_default_cards
+  after_save :create_default_lists
 
-  CARDS_DATA = [
+  LISTS_DATA = [
     { name: 'To Do', n_position: 1 },
     { name: 'Doing', n_position: 2 },
     { name: 'Done', n_position: 3 }
   ]
 
-  def create_default_cards
-    CARDS_DATA.each do |card|
-      Card.create(name: card[:name], n_position: card[:n_position], user: self)
+  def create_default_lists
+    LISTS_DATA.each do |list|
+      LIST.create(name: list[:name], n_position: list[:n_position], user: self)
     end
   end
 end

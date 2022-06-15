@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :card do
+  factory :list do
     name { Faker::Lorem.word }
     sequence :n_position do |n|
       n

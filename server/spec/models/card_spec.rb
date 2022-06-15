@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe Card, type: :model do
-  subject { build(:card) }
+RSpec.describe List, type: :model do
+  subject { build(:list) }
 
   describe 'Validations' do
     %i[name n_position].each do |field|
