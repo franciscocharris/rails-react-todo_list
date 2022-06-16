@@ -18,6 +18,7 @@ class ApplicationController < ActionController::API
   rescue_from JWT::DecodeError, with: :error_handler
   rescue_from ActiveRecord::RecordNotFound, with: :error_handler
   rescue_from ActiveRecord::RecordInvalid, with: :no_valid
+  rescue_from ActiveRecord::RecordNotDestroyed, with: :no_valid
   before_action :authorize_request, except: %i[signup login]
 
   def authorize_request
@@ -39,11 +40,11 @@ class ApplicationController < ActionController::API
 
   #
   def invalid_header
-    render json: { errors: 'authentication header has invalid format' }
+    render json: { errors: 'authentication header has invalid format' }, status: 403
   end
 
   def not_header
-    render json: { errors: 'authentication header wasn`t sent' }
+    render json: { errors: 'authentication header wasn`t sent' }, status: 403
   end
   #
 

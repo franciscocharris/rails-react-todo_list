@@ -21,13 +21,13 @@ module V1
     end
 
     def destroy
-      @list.destroy
+      @list.destroy!
     end
 
     private
 
     def find_list
-      @list = list.find!(params[:id])
+      @list = List.find(params[:id])
     end
 
     def list_params

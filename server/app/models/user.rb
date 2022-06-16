@@ -19,7 +19,7 @@ class User < ApplicationRecord
 
   def create_default_lists
     LISTS_DATA.each do |list|
-      LIST.create(name: list[:name], n_position: list[:n_position], user: self)
+      List.create(name: list[:name], n_position: list[:n_position], user: self)
     end
   end
 end
