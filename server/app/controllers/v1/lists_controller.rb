@@ -17,6 +17,7 @@ module V1
     end
 
     def update
+      # byebug
       @list.update!(list_params)
     end
 
