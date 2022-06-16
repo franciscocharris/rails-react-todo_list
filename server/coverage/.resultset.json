@@ -22,6 +22,7 @@
           null,
           null,
           1,
+          null,
           2,
           null,
           null,
@@ -154,6 +155,7 @@
           1,
           1,
           1,
+          1,
           null
         ]
       },
@@ -223,6 +225,15 @@
           null
         ]
       },
+      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/models/task.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
       "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/channels/application_cable/channel.rb": {
         "lines": [
           null,
@@ -279,6 +290,44 @@
         "branches": {
         }
       },
+      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/controllers/v1/tasks_controller.rb": {
+        "lines": [
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
       "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/jobs/application_job.rb": {
         "lines": [
           null,
@@ -307,6 +356,6 @@
         }
       }
     },
-    "timestamp": 1655398994
+    "timestamp": 1655410509
   }
 }

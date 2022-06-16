@@ -8,7 +8,8 @@ RSpec.describe V1::ListsController, type: :request do
   let!(:token_user) { JwtServices::Encoder.call(id: user.id) }
   let(:header) { { 'Authorization': "Bearer #{token_user}" } }
   let(:n_params) do
-    { name: 'new name',
+    { 
+      name: 'new name',
       # n_position: 1
     }
   end
@@ -75,7 +76,7 @@ RSpec.describe V1::ListsController, type: :request do
     context 'when the params are correct' do
       it do
         patch "/v1/lists/#{user.lists[0].id}", params: n_params, headers: header
-        expect(user.lists[0].name).to eq(n_params[:name])
+        expect(user.lists[0].reload.name).to eq(n_params[:name])
       end
     end
 
