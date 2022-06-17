@@ -1,8 +1,18 @@
 import axios from '../../config/axios'
 import { FormContainer } from '../FormContainer'
 import { InputText } from '../InputText'
+import { Formik, Form } from 'formik'
+import * as yup from 'yup'
 
 export function SignUp() {
+
+  // AGREGAR VALIDACIONES YUP
+  let validateSignup = yup.object({
+    firstName: yup.string().required('Name is Required').max(15, 'Must be 15 characters or less'),
+    lastName: yup.string().required('Last Name is Required').max(15, 'Must be 15 characters or less'),
+    email: yup.string().required('Email is Required').email('Email is invalid'),
+    password: yup.string().required('Password Required').min(8,'Password must be at least 8 characters')
+  })
 
   function Submit(e){
     e.preventDefault()
@@ -11,14 +21,7 @@ export function SignUp() {
       lastName,
       email,
       password
-    } = e.target
-
-    console.log('firstName.value', firstName.value)
-    console.log('firstName.value', lastName.value)
-    console.log('firstName.value', email.value)
-    console.log('firstName.value', password.value)
-
-    // AGREGAR VALIDACIONES
+    } = e.target  
 
     axios.post('/signup', {
       first_name: firstName.value,
@@ -33,16 +36,24 @@ export function SignUp() {
       console.log(error.message)
     })
   }
-  
+
   return(
-    <FormContainer title="Sign Up" onSubmit={Submit}> 
-      <InputText name="firstName" placeholder="Name" />
-      <InputText name="lastName" placeholder="Last Name" />
-      <InputText name="email" type="email" placeholder="Email" />
-      <InputText name="password" type="password" placeholder="Password" />
-      <input type="submit" value="CREATE ACCOUNT" className="form_button"/>
-      <a className="form_link-signin" href="/">Sign in</a>
+    <FormContainer title="Sign Up" >
+      <Formik
+        initialValues = {{firstName: '', lastName: '', email: '', password:''}}
+        validationSchema={validateSignup}
+      >
+      {() => (
+        <Form className="form" onSubmit={Submit}>
+          <InputText name="firstName" placeholder="Name" />
+          <InputText name="lastName" placeholder="Last Name" />
+          <InputText name="email" type="email" placeholder="Email" />
+          <InputText name="password" type="password" placeholder="Password" />
+          <input type="submit" value="CREATE ACCOUNT" className="form_button"/>
+          <a className="form_link-signin" href="/">Sign in</a>
+        </Form>
+      )}
+      </Formik>
     </FormContainer>  
   )
 }
-

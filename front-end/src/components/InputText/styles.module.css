@@ -1,5 +1,5 @@
 .input{
-  margin-bottom: 10px;
+  margin-top: 10px;
   color: #ffffff;
   height: 40px;
   outline: none;
@@ -7,5 +7,10 @@
   border-radius: 5px;
   border: 1px solid #ffffff;
   padding-left: 10px;
+}
+.messageError{
+  display:flex;
+  color: #d87575;
+  font-size: 13px;
 }
 
