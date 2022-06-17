@@ -4,65 +4,7 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-.container{
-  background-size: 100% 100%; 
-  background-repeat: no-repeat;
-  background-image: url(assets/sign-in.png);
-  height: 100vh;
-}
-
-.container_sign-in,
-.container_sign-up{
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  text-align: center;
-  height: 100vh;
-}
-
-.container_form{
-  color: #ffffff;
-  margin: auto auto;
-  width: 80%;
-  max-width: 300px;
-}
-
-.form{
-  display: flex;
-  flex-direction: column;
-}
-
-.form_input{
-  margin-bottom: 10px;
-  color: #ffffff;
-  height: 40px;
-  outline: none;
-  background-color: transparent;
-  border-radius: 5px;
-  border: 1px solid #ffffff;
-  padding-left: 10px;
-}
-
-.form_button{
-  height: 35px;
-  background-color: #fff;
-  border: none;
-  border-radius: 5px;
-  color: #2a4bc5;
-  font-weight: bold;
-  cursor: pointer;
-}
 
 ::placeholder{ 
   color: #ffffff; 
 }
-
-.form_link-signup,
-.form_link-signin{
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
-  color: #ffffff;
-  text-decoration: none;
-}
-
