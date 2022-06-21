@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/models/user.rb": {
+      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/models/list.rb": {
         "lines": [
           null,
           null,
@@ -10,23 +10,6 @@
           1,
           1,
           1,
-          1,
-          null,
-          12,
-          12,
-          1,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          11,
-          33,
-          null,
-          null,
           null
         ]
       },
@@ -39,11 +22,249 @@
           null
         ]
       },
-      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/models/card.rb": {
+      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/models/task.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/models/user.rb": {
         "lines": [
           null,
           null,
           1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          51,
+          43,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          42,
+          126,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/controllers/v1/lists_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          4,
+          4,
+          2,
+          null,
+          null,
+          1,
+          null,
+          2,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          3,
+          null,
+          null,
+          1,
+          6,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/controllers/application_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          19,
+          null,
+          15,
+          15,
+          15,
+          15,
+          null,
+          null,
+          1,
+          null,
+          1,
+          19,
+          null,
+          16,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          3,
+          null,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          7,
+          null,
+          null
+        ]
+      },
+      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/controllers/v1/tasks_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          4,
+          4,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          3,
+          null,
+          null,
+          1,
+          6,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/services/jwt_services/decoder.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          16,
+          null,
+          null,
+          1,
+          16,
+          16,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/services/application_service.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          44,
+          null,
+          null
+        ]
+      },
+      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/services/jwt_services/encoder.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          28,
+          null,
+          null,
+          1,
+          28,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/serializers/list_serializer.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/serializers/user_serializer.rb": {
+        "lines": [
+          null,
+          null,
           1,
           1,
           1,
@@ -80,72 +301,6 @@
           null
         ]
       },
-      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/controllers/application_controller.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          1,
-          null,
-          1,
-          2,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/services/jwt_services/encoder.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          1,
-          7,
-          null,
-          null,
-          1,
-          7,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/services/application_service.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          7,
-          null,
-          null
-        ]
-      },
       "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/channels/application_cable/channel.rb": {
         "lines": [
           null,
@@ -162,104 +317,6 @@
         "lines": [
           null,
           null,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/controllers/v1/cards_controller.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/controllers/v1/users_controller.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
           0,
           0,
           0,
@@ -294,52 +351,8 @@
         ],
         "branches": {
         }
-      },
-      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/serializers/card_serializer.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/serializers/user_serializer.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/services/jwt_services/decoder.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
       }
     },
-    "timestamp": 1655241263
+    "timestamp": 1655826420
   }
 }

@@ -1,13 +1,16 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :card do
+  factory :list do
     name { Faker::Lorem.word }
-    n_position { 1 }
+    sequence :n_position do |n|
+      n
+    end
     user_id { create(:user).id }
   end
 
-  trait :user1 do
-    user_id { 1 }
+  trait :w_list do
+    name { '' }
+    n_position { 1 }
   end
 end
