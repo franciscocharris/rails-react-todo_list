@@ -17,11 +17,11 @@ module V1
     end
 
     def update
-      # byebug
       @list.update!(list_params)
     end
 
     def change_position
+      # byebug
       @list.update_attribute(:n_position, list_params[:n_position])
     end
 
