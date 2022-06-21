@@ -1,3 +1,4 @@
+import axios from '../../config/axios'
 import { Link } from "react-router-dom"
 import { FormContainer } from '../FormContainer'
 import { InputText } from '../InputText'
@@ -11,6 +12,25 @@ export function SignIn() {
     password: yup.string().required('Password Required').min(8,'Password is Invalid')
   })
 
+  function SubmitSignIn(e) {
+    e.preventDefault()
+    const{
+      email,
+      password
+    } = e.target
+
+    axios.post('/login', {
+      email: email.value,
+      password: password.value
+    })
+    .then(response => {
+      console.log(response.data)
+    })
+    .catch(error => {
+      console.log('Error :',error.message) 
+    })
+  }
+
   return(
     <>
       <FormContainer title="Sign In">
@@ -19,7 +39,7 @@ export function SignIn() {
           validationSchema={validateSignin}
         >
           {() => (
-            <Form className="form">
+            <Form className="form" onSubmit={SubmitSignIn}>
               <InputText name="email" type="email" placeholder="Email"  />
               <InputText name="password" type="password" placeholder="Password" />
               <input type="submit" value="LOGIN" className="form_button"/>

@@ -14,7 +14,7 @@ export function SignUp() {
     password: yup.string().required('Password is Required').min(8,'Password must be at least 8 characters')
   })
 
-  function Submit(e){
+  function SubmitSignUp(e){
     e.preventDefault()
     const{
       firstName,
@@ -33,7 +33,7 @@ export function SignUp() {
       console.log(response.data)
     })
     .catch(error => {
-      console.log('Error :',error.message) // Error : Cannot access 'token' before initialization
+      console.log('Error :',error.message) 
     })
   }
 
@@ -44,7 +44,7 @@ export function SignUp() {
         validationSchema={validateSignup}
       >
       {() => (
-        <Form className="form" onSubmit={Submit}>
+        <Form className="form" onSubmit={SubmitSignUp}>
           <InputText name="firstName" placeholder="Name" />
           <InputText name="lastName" placeholder="Last Name" />
           <InputText name="email" type="email" placeholder="Email" />
