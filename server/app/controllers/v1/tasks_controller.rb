@@ -11,7 +11,6 @@ module V1
     end
 
     def update
-      # byebug
       @task.update!(task_params)
     end
 
@@ -22,11 +21,11 @@ module V1
     private
 
     def find_task
-      @task = task.find(params[:id])
+      @task = Task.find(params[:id])
     end
 
     def task_params
-      params.permit(:name, :description, :task_id)
+      params.permit(:id, :name, :description, :list_id)
     end
   end
 end

@@ -3,6 +3,7 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :lists, dependent: :destroy
+  has_many :tasks, dependent: :destroy
   validates :first_name, :last_name, :email, :password, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
   validates :password,

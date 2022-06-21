@@ -8,7 +8,7 @@ RSpec.describe V1::ListsController, type: :request do
   let!(:token_user) { JwtServices::Encoder.call(id: user.id) }
   let(:header) { { 'Authorization': "Bearer #{token_user}" } }
   let(:n_params) do
-    { 
+    {
       name: 'new name',
       # n_position: 1
     }
