@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   namespace :v1 do
     post 'signup', to: 'sessions#signup'
     post 'login', to: 'sessions#login'
-    resources :lists, except: %i[show]
+    resources :lists, except: %i[show] do
+      post 'change_position', on: :member
+    end
     resources :tasks
   end
   get '/*a', to: 'application#not_found'
