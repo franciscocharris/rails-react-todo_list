@@ -7,11 +7,11 @@ import * as yup from 'yup'
 export function SignUp() {
 
   // AGREGAR VALIDACIONES YUP
-  let validateSignup = yup.object({
+  const validateSignup = yup.object({
     firstName: yup.string().required('Name is Required').max(15, 'Must be 15 characters or less'),
     lastName: yup.string().required('Last Name is Required').max(15, 'Must be 15 characters or less'),
     email: yup.string().required('Email is Required').email('Email is invalid'),
-    password: yup.string().required('Password Required').min(8,'Password must be at least 8 characters')
+    password: yup.string().required('Password is Required').min(8,'Password must be at least 8 characters')
   })
 
   function Submit(e){
@@ -33,7 +33,7 @@ export function SignUp() {
       console.log(response.data)
     })
     .catch(error => {
-      console.log(error.message)
+      console.log('Error :',error.message) // Error : Cannot access 'token' before initialization
     })
   }
 
