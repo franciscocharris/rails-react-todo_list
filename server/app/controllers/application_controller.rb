@@ -3,8 +3,8 @@
 class ApplicationController < ActionController::API
   #
   class AutorizationError < StandardError; end
-  class HeaderNotSent < AutorizationError; end
-  class InvalidHeader < AutorizationError; end
+  class HeaderNotSent < StandardError; end
+  class InvalidHeader < StandardError; end
   #
 
   class AuthenticationError < StandardError; end

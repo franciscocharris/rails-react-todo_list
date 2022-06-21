@@ -88,6 +88,13 @@ RSpec.describe V1::ListsController, type: :request do
     end
   end
 
+  describe 'POST/ change_position' do
+    it do
+      post "/v1/lists/#{user.lists[0].id}/change_position", params: { n_position: 2 }, headers: header
+      expect(user.lists[0].reload.n_position).to eq(2)
+    end
+  end
+
   describe 'DELETE /destroy' do
     context "when the request has header" do
       it {
