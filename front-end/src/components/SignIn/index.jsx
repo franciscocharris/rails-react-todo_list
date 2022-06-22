@@ -1,11 +1,17 @@
 import axios from '../../config/axios'
-import { Link } from "react-router-dom"
+import {useState} from 'react'
+import { Link, Navigate } from "react-router-dom"
 import { FormContainer } from '../FormContainer'
 import { InputText } from '../InputText'
 import { Formik, Form } from 'formik'
+import './styles.css'
 import * as yup from 'yup'
 
+
 export function SignIn() {
+
+  const [success, setSuccess] = useState(false)
+  const [failure, setFailure] = useState(false)
 
   let validateSignin = yup.object({
     email: yup.string().required('Email is Required').email('Email is invalid'),
@@ -25,9 +31,11 @@ export function SignIn() {
     })
     .then(response => {
       console.log(response.data)
+      setSuccess(true)
     })
     .catch(error => {
-      console.log('Error :',error.message) 
+      console.log('Error :',error.message)
+      setFailure(true)
     })
   }
 
@@ -46,6 +54,8 @@ export function SignIn() {
               <Link to={`/sign-up`} className="form_link-signup">
                 <span> Sign up for an account </span>
               </Link>
+              {success ? <Navigate to="/dashboard"/> :  ''}
+              {failure ? (<div className="messageFailure">The username or password is incorrect</div>) : ''}
             </Form>
           )}
         </Formik>

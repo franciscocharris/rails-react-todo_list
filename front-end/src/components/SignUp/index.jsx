@@ -1,10 +1,13 @@
 import axios from '../../config/axios'
+import { Navigate } from "react-router-dom"
 import { FormContainer } from '../FormContainer'
 import { InputText } from '../InputText'
 import { Formik, Form } from 'formik'
+import {useState} from 'react'
 import * as yup from 'yup'
 
 export function SignUp() {
+  const [success, setSuccess] = useState(false)
 
   // AGREGAR VALIDACIONES YUP
   const validateSignup = yup.object({
@@ -31,6 +34,7 @@ export function SignUp() {
     })
     .then(response => {
       console.log(response.data)
+      setSuccess(true)
     })
     .catch(error => {
       console.log('Error :',error.message) 
@@ -51,6 +55,7 @@ export function SignUp() {
           <InputText name="password" type="password" placeholder="Password" />
           <input type="submit" value="CREATE ACCOUNT" className="form_button"/>
           <a className="form_link-signin" href="/">Sign in</a>
+          {success ? <Navigate to="/"/> :  ''}
         </Form>
       )}
       </Formik>
