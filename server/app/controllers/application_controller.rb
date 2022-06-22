@@ -19,6 +19,7 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound, with: :error_handler
   rescue_from ActiveRecord::RecordInvalid, with: :no_valid
   rescue_from ActiveRecord::RecordNotDestroyed, with: :no_valid
+  rescue_from ActionDispatch::Http::Parameters::ParseError, with: :b_request
   before_action :authorize_request, except: %i[signup login]
 
   def authorize_request
@@ -58,5 +59,9 @@ class ApplicationController < ActionController::API
 
   def no_valid(err)
     render json: { errors: err.record.errors.full_messages }, status: 422
+  end
+
+  def b_request(err)
+    render json: { errors: err.message }, status: 400
   end
 end

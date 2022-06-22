@@ -1,0 +1,188 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/v1/signup": {
+      "post": {
+        "summary": "signup user",
+        "tags": [
+          "sessions"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "return a JWT",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6Mn0.VE73XwpT1UCjEsPkb80uphw6Jb7CoHLY720wFBNp618"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "incorrect request was sent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "string",
+                      "example": "859: unexpected token at '{\n  \"first_name\": \"$_ft\",\n  \"last_name\": \" crfrfr\",\n  \"email\": \"user@gmail.com\",\n  \"password\": ''\n}'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "example": [
+                        "Password can't be blank",
+                        "First name can't be blank",
+                        "Last name can't be blank",
+                        "Email can't be blank",
+                        "Email is invalid",
+                        "Password is too short (minimum is 6 characters)"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "first_name": {
+                    "type": "string",
+                    "example": "Werner"
+                  },
+                  "last_name": {
+                    "type": "syring",
+                    "example": "Abbott"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "user@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "12345678"
+                  }
+                },
+                "required": [
+                  "first_name",
+                  "last_name",
+                  "email",
+                  "password"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/login": {
+      "post": {
+        "summary": "login user",
+        "tags": [
+          "sessions"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "return a JWT",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.ciMZsyguAsDiKAmLXsklm7Xh8-67QKSdixcd3yyboJ0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "wrong credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "string",
+                      "example": "wrong credentials"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "user@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "12345678"
+                  }
+                },
+                "required": [
+                  "email",
+                  "password"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://{defaultHost}",
+      "variables": {
+        "defaultHost": {
+          "default": "localhost:3000/"
+        }
+      }
+    }
+  ]
+}
