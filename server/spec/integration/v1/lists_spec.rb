@@ -25,7 +25,32 @@ describe 'toDo API lists' do
                     type: :object,
                     properties: {
                       name: { type: :string, example: "Doing" },
-                      n_position: {type: :integer, example: 2}
+                      n_position: { type: :integer, example: 2 }
+                    }
+                  },
+                  relationships: {
+                    type: :object,
+                    properties: {
+                      tasks: {
+                        type: :object,
+                        properties: {
+                          data: {
+                            type: :array,
+                            items: {
+                              type: :object,
+                              properties: {
+                                id: { type: :integer, example: 1 },
+                                name: { type: :string, example: "hola" },
+                                description: { type: :string, exmaple: "abc" },
+                                list_id: { type: :integer, example: 5},
+                                created_at: { type: :string, example: "2022-06-23T20:40:28.305Z" },
+                                updated_at: { type: :string, example: "2022-06-23T20:40:28.305Z" },
+                                user_id: { type: :integer, example: 2 } 
+                              }
+                            }
+                          }
+                        }
+                      } 
                     }
                   }
                 }
