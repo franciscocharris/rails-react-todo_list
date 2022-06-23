@@ -1,188 +1,432 @@
-{
-  "openapi": "3.0.1",
-  "info": {
-    "title": "API V1",
-    "version": "v1"
-  },
-  "paths": {
-    "/v1/signup": {
-      "post": {
-        "summary": "signup user",
-        "tags": [
-          "sessions"
-        ],
-        "parameters": [
-
-        ],
-        "responses": {
-          "200": {
-            "description": "return a JWT",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "token": {
-                      "type": "string",
-                      "example": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6Mn0.VE73XwpT1UCjEsPkb80uphw6Jb7CoHLY720wFBNp618"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "incorrect request was sent",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "errors": {
-                      "type": "string",
-                      "example": "859: unexpected token at '{\n  \"first_name\": \"$_ft\",\n  \"last_name\": \" crfrfr\",\n  \"email\": \"user@gmail.com\",\n  \"password\": ''\n}'"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "invalid parameters",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "errors": {
-                      "type": "array",
-                      "example": [
-                        "Password can't be blank",
-                        "First name can't be blank",
-                        "Last name can't be blank",
-                        "Email can't be blank",
-                        "Email is invalid",
-                        "Password is too short (minimum is 6 characters)"
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "first_name": {
-                    "type": "string",
-                    "example": "Werner"
-                  },
-                  "last_name": {
-                    "type": "syring",
-                    "example": "Abbott"
-                  },
-                  "email": {
-                    "type": "string",
-                    "example": "user@gmail.com"
-                  },
-                  "password": {
-                    "type": "string",
-                    "example": "12345678"
-                  }
-                },
-                "required": [
-                  "first_name",
-                  "last_name",
-                  "email",
-                  "password"
-                ]
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/login": {
-      "post": {
-        "summary": "login user",
-        "tags": [
-          "sessions"
-        ],
-        "parameters": [
-
-        ],
-        "responses": {
-          "200": {
-            "description": "return a JWT",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "token": {
-                      "type": "string",
-                      "example": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.ciMZsyguAsDiKAmLXsklm7Xh8-67QKSdixcd3yyboJ0"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "wrong credentials",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "errors": {
-                      "type": "string",
-                      "example": "wrong credentials"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "type": "string",
-                    "example": "user@gmail.com"
-                  },
-                  "password": {
-                    "type": "string",
-                    "example": "12345678"
-                  }
-                },
-                "required": [
-                  "email",
-                  "password"
-                ]
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "servers": [
-    {
-      "url": "http://{defaultHost}",
-      "variables": {
-        "defaultHost": {
-          "default": "localhost:3000/"
-        }
-      }
-    }
-  ]
-}
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/v1/lists":
+    get:
+      summary: index
+      tags:
+      - lists
+      security:
+      - JWT: []
+      responses:
+        '200':
+          description: return user`s lists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        type:
+                          type: string
+                          example: lists
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              example: Doing
+                            n_position:
+                              type: integer
+                              example: 2
+        1. 403:
+          description: header was no sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: authentication header wasn`t sent
+        2. 403:
+          description: header has incorrect format
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: authentication header has invalid format
+        '204':
+          description: the user has no lists to show
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: there`s no lists to show
+        '400':
+          description: incorrect request was sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: |-
+                      859: unexpected token at '{
+                        "first_name": "$_ft",
+                        "last_name": " crfrfr",
+                        "email": "user@gmail.com",
+                        "password": ''
+                      }'
+    post:
+      summary: create list
+      tags:
+      - lists
+      security:
+      - JWT: []
+      parameters: []
+      responses:
+        '201':
+          description: return the id of list created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 70
+        '422':
+          description: invalid parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    example:
+                    - N position has already been taken
+        '400':
+          description: incorrect request was sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: |-
+                      859: unexpected token at '{
+                        "first_name": "$_ft",
+                        "last_name": " crfrfr",
+                        "email": "user@gmail.com",
+                        "password": ''
+                      }'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: backlog week 1
+                n_position:
+                  type: integer
+                  example: 4
+              required:
+              - name
+              - n_position
+  "/v1/lists/{id}":
+    patch:
+      summary: update list
+      tags:
+      - lists
+      security:
+      - JWT: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: list updated - without response returned
+        '401':
+          description: list not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Couldn't find List with 'id'= 123
+        '422':
+          description: invalid parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    example:
+                    - N position has already been taken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: backlog week 1
+              required:
+              - name
+    put:
+      summary: update list
+      tags:
+      - lists
+      security:
+      - JWT: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: list updated - without response returned
+        '401':
+          description: list not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Couldn't find List with 'id'= 123
+        '422':
+          description: invalid parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    example:
+                    - N position has already been taken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: backlog week 1
+              required:
+              - name
+    delete:
+      summary: delete list
+      tags:
+      - lists
+      security:
+      - JWT: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: list deleted - without response returned
+        '401':
+          description: list not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Couldn't find List with 'id'= 123
+        '422':
+          description: invalid parameters
+  "/v1/lists/{id}/change_position":
+    post:
+      summary: update the position of list
+      tags:
+      - lists
+      security:
+      - JWT: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: list updated - without response returned
+        '401':
+          description: list not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Couldn't find List with 'id'= 123
+        '422':
+          description: invalid parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    example:
+                    - n_position must be sent
+  "/v1/signup":
+    post:
+      summary: signup user
+      tags:
+      - sessions
+      parameters: []
+      responses:
+        '200':
+          description: return a JWT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6Mn0.VE73XwpT1UCjEsPkb80uphw6Jb7CoHLY720wFBNp618
+        '400':
+          description: incorrect request was sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: |-
+                      859: unexpected token at '{
+                        "first_name": "$_ft",
+                        "last_name": " crfrfr",
+                        "email": "user@gmail.com",
+                        "password": ''
+                      }'
+        '422':
+          description: invalid parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    example:
+                    - Password can't be blank
+                    - First name can't be blank
+                    - Last name can't be blank
+                    - Email can't be blank
+                    - Email is invalid
+                    - Password is too short (minimum is 6 characters)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  example: Angelina
+                last_name:
+                  type: syring
+                  example: Balistreri
+                email:
+                  type: string
+                  example: user@gmail.com
+                password:
+                  type: string
+                  example: '12345678'
+              required:
+              - first_name
+              - last_name
+              - email
+              - password
+  "/v1/login":
+    post:
+      summary: login user
+      tags:
+      - sessions
+      parameters: []
+      responses:
+        '200':
+          description: return a JWT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.ciMZsyguAsDiKAmLXsklm7Xh8-67QKSdixcd3yyboJ0
+        '401':
+          description: wrong credentials
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: wrong credentials
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: user@gmail.com
+                password:
+                  type: string
+                  example: '12345678'
+              required:
+              - email
+              - password
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000/
+components:
+  securitySchemes:
+    JWT:
+      type: apiKey
+      name: Authorization
+      description: User JWT access token
+      in: header
