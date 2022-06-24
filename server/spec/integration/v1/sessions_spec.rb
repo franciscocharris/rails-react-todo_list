@@ -20,22 +20,10 @@ describe 'toDo API sessions' do
       }
 
       response '200', 'return a JWT' do
-        let(:params) { attributes_for(user) }
+        let(:params) { attributes_for(:user) }
         schema type: :object,
           properties: {
             token: { type: :string, example: JwtServices::Encoder.call(id: 2) }
-          }
-        run_test!
-      end
-
-      response '400', 'incorrect request was sent' do
-        let(:params) { attributes_for(:user, :w_user) }
-        schema type: :object,
-          properties: {
-            errors: {
-              type: :string,
-              example: "859: unexpected token at '{\n  \"first_name\": \"$_ft\",\n  \"last_name\": \" crfrfr\",\n  \"email\": \"user@gmail.com\",\n  \"password\": ''\n}'"
-            }
           }
         run_test!
       end

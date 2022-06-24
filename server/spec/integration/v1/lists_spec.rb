@@ -19,7 +19,7 @@ describe 'toDo API lists' do
               items: {
                 type: :object,
                 properties: {
-                  id: { type: :integer, example: 1 },
+                  id: { type: :string, example: '1' },
                   type: { type: :string, example: 'lists' },
                   attributes: {
                     type: :object,
@@ -70,7 +70,7 @@ describe 'toDo API lists' do
       end
 
       response '2. 403', 'header has incorrect format' do
-        let(:token) { token.gsub('Bearer') }
+        let(:Authorization) { token.gsub('Bearer') }
         schema type: :object,
           properties: {
             errors: { type: :string, example: 'authentication header has invalid format' }
@@ -125,6 +125,7 @@ describe 'toDo API lists' do
       end
 
       response '422', 'invalid parameters' do
+        let(:Authorization) { token }
         let(:params) { attributes_for(:list, :w_list, user_id: user.id) }
         schema type: :object,
           properties: {
@@ -136,7 +137,8 @@ describe 'toDo API lists' do
       end
 
       response '400', 'incorrect request was sent' do
-        let(:params) { attributes_for(:user, :w_user) }
+        let(:Authorization) { token }
+        let(:params) { attributes_for(:list, n_position: user.lists.count+1, user_id: user.id) }
         schema type: :object,
           properties: {
             errors: {
@@ -168,12 +170,14 @@ describe 'toDo API lists' do
 
       response '204', 'list updated - without response returned' do
         let(:id) { create(:list, n_position: user.lists.count+1, user_id: user.id).id }
+        let(:params) { attributes_for(:list, n_position: user.lists.count+1, user_id: user.id) }
         let(:Authorization) { token }
         run_test!
       end
 
       response '401', 'list not found' do
         let(:id) { 123 }
+        let(:params) { attributes_for(:list, n_position: user.lists.count+1, user_id: user.id) }
         let(:Authorization) { token }
         schema type: :object,
           properties: {
@@ -184,6 +188,7 @@ describe 'toDo API lists' do
 
       response '422', 'invalid parameters' do
         let(:id) { create(:list, n_position: user.lists.count+1, user_id: user.id).id }
+        let(:params) { attributes_for(:list, n_position: user.lists.count+1, user_id: user.id) }
         let(:Authorization) { token }
         schema type: :object,
           properties: {
@@ -212,21 +217,24 @@ describe 'toDo API lists' do
       response '204', 'list updated - without response returned' do
         let(:id) { create(:list, n_position: user.lists.count+1, user_id: user.id).id }
         let(:Authorization) { token }
+        let(:params) { attributes_for(:list, n_position: user.lists.count+1, user_id: user.id) }
         run_test!
       end
 
       response '401', 'list not found' do
         let(:id) { 123 }
         let(:Authorization) { token }
+        let(:params) { attributes_for(:list, n_position: user.lists.count+1, user_id: user.id) }
         schema type: :object,
           properties: {
-            errors: { type: :string, example: "Couldn't find List with 'id'= #{123}" }
+            errors: { type: :string, example: "Couldn't find List with 'id'= 123" }
           }
         run_test!
       end
 
       response '422', 'invalid parameters' do
         let(:id) { create(:list, n_position: user.lists.count+1, user_id: user.id).id }
+        let(:params) { attributes_for(:list, :w_list, user_id: user.id) }
         let(:Authorization) { token }
         schema type: :object,
           properties: {
@@ -258,12 +266,6 @@ describe 'toDo API lists' do
           properties: {
             errors: { type: :string, example: "Couldn't find List with 'id'= #{123}" }
           }
-        run_test!
-      end
-
-      response '422', 'invalid parameters' do
-        let(:id) { create(:list, n_position: user.lists.count+1, user_id: user.id).id }
-        let(:Authorization) { token }
         run_test!
       end
     end
@@ -302,6 +304,7 @@ describe 'toDo API lists' do
 
       response '422', 'invalid parameters' do
         let(:id) { create(:list, n_position: user.lists.count+1, user_id: user.id).id }
+        let(:n_position1) { '5' }
         let(:Authorization) { token }
         schema type: :object,
           properties: {
