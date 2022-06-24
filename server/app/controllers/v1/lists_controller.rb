@@ -7,7 +7,7 @@ module V1
     def index
       return render json: { errors: 'there`s no lists to show' }, status: 204 unless (@lists = @current_user.lists.all)
 
-      render json: @lists, status: :ok
+      render json: @lists, status: 200
     end
 
     def create
@@ -21,7 +21,6 @@ module V1
     end
 
     def change_position
-      # byebug
       @list.update_attribute(:n_position, list_params[:n_position])
     end
 
