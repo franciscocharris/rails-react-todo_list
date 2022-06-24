@@ -4,6 +4,7 @@ describe 'toDo API tasks' do
   let!(:user) { create(:user, :to_logg) }
   let(:list) { user.lists[0] }
   let(:token) { "Bearer #{JwtServices::Encoder.call(id: user.id)}" }
+  let(:task) { create(:task, list_id: list.id) }
 
   path '/v1/tasks' do
 
@@ -68,7 +69,7 @@ describe 'toDo API tasks' do
       }
 
       response '204', 'task updated - without response returned' do
-        let(:id) { list.id }
+        let(:id) { task.id }
         let(:params) { attributes_for(:task, list_id: list.id) }
         let(:Authorization) { token }
         run_test!
@@ -86,8 +87,9 @@ describe 'toDo API tasks' do
       end
 
       response '422', 'invalid parameters' do
-        let(:id) { list.id }
+        let(:id) { task.id }
         let(:params) { attributes_for(:task, :w_task) }
+        let(:Authorization) { token }
         schema type: :object,
           properties: {
             errors: { type: :array, example: [
@@ -118,6 +120,7 @@ describe 'toDo API tasks' do
       }
 
       response '204', 'task updated - without response returned' do
+        let(:id) { task.id }
         let(:params) { attributes_for(:task, list_id: list.id) }
         let(:Authorization) { token }
         run_test!
@@ -125,16 +128,19 @@ describe 'toDo API tasks' do
 
       response '401', 'task not found' do
         let(:id) { 123 }
+        let(:params) { attributes_for(:task, list_id: list.id) }
         let(:Authorization) { token }
         schema type: :object,
           properties: {
-            errors: { type: :string, example: "Couldn't find task with 'id'= #{123}" }
+            errors: { type: :string, example: "Couldn't find task with 'id'= 123" }
           }
         run_test!
       end
 
       response '422', 'invalid parameters' do
+        let(:id) { task.id }
         let(:params) { attributes_for(:task, :w_task) }
+        let(:Authorization) { token }
         schema type: :object,
           properties: {
             errors: { type: :array, example: [
@@ -155,6 +161,7 @@ describe 'toDo API tasks' do
       parameter name: :id, in: :path, type: :string
 
       response '204', 'task deleted - without response returned' do
+        let(:id) { task.id }
         let(:params) { attributes_for(:task, list_id: list.id) }
         let(:Authorization) { token }
         run_test!
@@ -170,11 +177,6 @@ describe 'toDo API tasks' do
         run_test!
       end
 
-      response '422', 'invalid parameters' do
-        let(:params) { attributes_for(:task, list_id: list.id) }
-        let(:Authorization) { token }
-        run_test!
-      end
     end
   end
 
