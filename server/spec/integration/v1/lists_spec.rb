@@ -61,21 +61,24 @@ describe 'toDo API lists' do
         run_test!
       end
 
-      response '1. 403', 'header was no sent' do
-        schema type: :object,
-          properties: {
-            errors: { type: :string, example: 'authentication header wasn`t sent' }
-          }
-        run_test!
-      end
+      response '403', 'header was no sent' do
+        context 'the header not exists' do
+          let(:Authorization) {  }
+          schema type: :object,
+            properties: {
+              errors: { type: :string, example: 'authentication header wasn`t sent' }
+            }
+          run_test!
+        end
 
-      response '2. 403', 'header has incorrect format' do
-        let(:Authorization) { token.gsub('Bearer') }
-        schema type: :object,
-          properties: {
-            errors: { type: :string, example: 'authentication header has invalid format' }
-          }
-        run_test!
+        context 'header without Bearer ' do
+          let(:Authorization) { token.gsub('Bearer') }
+          schema type: :object,
+            properties: {
+              errors: { type: :string, example: 'authentication header has invalid format' }
+            }
+          run_test!
+        end
       end
 
       response '204', 'the user has no lists to show' do
@@ -86,20 +89,8 @@ describe 'toDo API lists' do
           }
         run_test!
       end
-
-      response '400', 'incorrect request was sent' do
-        let(:Authorization) { token }
-        schema type: :object,
-          properties: {
-            errors: {
-              type: :string,
-              example: "859: unexpected token at '{\n  \"first_name\": \"$_ft\",\n  \"last_name\": \" crfrfr\",\n  \"email\": \"user@gmail.com\",\n  \"password\": ''\n}'"
-            }
-          }
-        run_test!
-      end
-
     end
+
     post 'create list' do
       tags 'lists'
       consumes 'application/json'
@@ -132,19 +123,6 @@ describe 'toDo API lists' do
             errors: { type: :array, example: [
               "N position has already been taken"
             ] }
-          }
-        run_test!
-      end
-
-      response '400', 'incorrect request was sent' do
-        let(:Authorization) { token }
-        let(:params) { attributes_for(:list, n_position: user.lists.count+1, user_id: user.id) }
-        schema type: :object,
-          properties: {
-            errors: {
-              type: :string,
-              example: "859: unexpected token at '{\n  \"first_name\": \"$_ft\",\n  \"last_name\": \" crfrfr\",\n  \"email\": \"user@gmail.com\",\n  \"password\": ''\n}'"
-            }
           }
         run_test!
       end
@@ -188,7 +166,7 @@ describe 'toDo API lists' do
 
       response '422', 'invalid parameters' do
         let(:id) { create(:list, n_position: user.lists.count+1, user_id: user.id).id }
-        let(:params) { attributes_for(:list, n_position: user.lists.count+1, user_id: user.id) }
+        let(:params) { attributes_for(:list, :w_list, user_id: user.id) }
         let(:Authorization) { token }
         schema type: :object,
           properties: {
@@ -277,7 +255,7 @@ describe 'toDo API lists' do
       produces 'application/json'
       security [JWT: []]
       parameter name: :id, in: :path, type: :string
-      parameter name: :n_position1, in: :body, schema: {
+      parameter name: :n_position, in: :body, schema: {
         type: :object,
         properties: {
           n_position: { type: :integer, example: 5 }
@@ -288,7 +266,7 @@ describe 'toDo API lists' do
       response '204', 'list updated - without response returned' do
         let(:id) { create(:list, n_position: user.lists.count+1, user_id: user.id).id }
         let(:Authorization) { token }
-        let(:n_position1) { 5 }
+        let(:n_position) { 5 }
         run_test!
       end
 
@@ -302,18 +280,6 @@ describe 'toDo API lists' do
         run_test!
       end
 
-      response '422', 'invalid parameters' do
-        let(:id) { create(:list, n_position: user.lists.count+1, user_id: user.id).id }
-        let(:n_position1) { '5' }
-        let(:Authorization) { token }
-        schema type: :object,
-          properties: {
-            errors: { type: :array, example: [
-              "n_position must be sent"
-            ] }
-          }
-        run_test!
-      end
     end
   end
 end
