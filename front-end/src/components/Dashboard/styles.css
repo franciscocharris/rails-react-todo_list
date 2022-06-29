@@ -40,3 +40,41 @@
   font-weight: bold;
 }
 
+/* Modal */
+
+.overlay{
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+}
+
+.modal_container{
+  width: 500px;
+  min-height: 100px;
+  background-color: transparent;
+  border: 1px solid #fff;
+  position: relative;
+  border-radius: 5px;
+  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+  padding: 20px;
+  margin: 0 auto;
+  margin-top: 200px;
+}
+
+.modal_button-close{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  color:#fff;
+  transition: .3s ease all;
+  border-radius: 5px;
+}
+
+.modal_button-close:hover{
+  background-color:#fff;
+  color: #000;
+}
+
