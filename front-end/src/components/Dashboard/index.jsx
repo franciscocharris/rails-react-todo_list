@@ -1,39 +1,82 @@
-import { List } from './List'
+import { useEffect } from 'react'
+import { Board } from './Board'
 import { Modal } from './Modal'
 import { useState } from 'react'
 import { InputText } from '../InputText'
 import { Formik, Form } from 'formik'
 import './styles.css'
 
+const mock = {
+  "data": [
+    {
+      "id": 1,
+      "title": "hola 1",
+      "description": "string 2",
+      "status": "NOT_STARTED",
+    },
+    {
+      "id": 2,
+      "title": "hola 2",
+      "description": "string 2",
+      "status": "IN_PROGRESS",
+    },
+    {
+      "id": 4,
+      "title": "hola 3",
+      "description": "string",
+      "status": "IN_PROGRESS",
+    }
+  ]
+}
+
+
+const tasksSet = new Set()
 
 export function Dashboard() {
-  const [modal, setModal] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const [tasks, setTasks] = useState([])
+  const [columns, setColumns] = useState([])
+  const modalRoot = document.getElementById('modal-root')
+  console.log('isOpen', isOpen)
+
+
+
+
+  useEffect(() => {
+    // feching data
+    mock.data.forEach((task) => tasksSet.add(task.status))
+    setColumns([...tasksSet])
+    setTasks(mock.data)
+
+  }, [mock.data])
 
   return (
     <>
-    <div className="dashboard_container">
-      <span className="dashboard_title">Dashboard</span>
-      <div className="container_buttons">
-        <input onClick={() => setModal(!modal)} type="button" value="CREATE TASK" className="dashboard_button task"/>
-        <input type="button" value="LOGOUT" className="dashboard_button logout"/>
+      <div className="dashboard_container">
+        <span className="dashboard_title">Dashboard</span>
+        <div className="container_buttons">
+          <input onClick={() => setIsOpen(true) + modalRoot.classList.add('active')} type="button" value="CREATE TASK" className="dashboard_button task"/>
+          <input type="button" value="LOGOUT" className="dashboard_button logout"/>
+        </div>
       </div>
-    </div>
 
-    <Modal modal={modal} setModal={setModal}>
-      <Formik
-        initialValues = {{title: '', descripcion: ''}}
-      >
-          {() => (
-            <Form className="form">
-              <InputText name="title" placeholder="Title"/>
-              <InputText name="descripcion" placeholder="Descripcion"/>
-            </Form>
-          )}
-        </Formik>
-    </Modal>
-    
+      {
+        isOpen &&
+        <Modal handleClose={setIsOpen}>
+          <Formik
+            initialValues = {{title: '', descripcion: ''}}
+          >
+              {() => (
+                <Form className="form">
+                  <InputText name="title" placeholder="Title" className="form-modal"/>
+                  <InputText name="descripcion" placeholder="Descripcion"/>
+                </Form>
+              )}
+            </Formik>
+        </Modal>
+      }
 
-    <List/>
+      <Board columns={columns} tasks={tasks} />
     </>
   )
 }
