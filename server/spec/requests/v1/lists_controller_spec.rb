@@ -20,7 +20,7 @@ RSpec.describe V1::ListsController, type: :request do
         it do
           get '/v1/lists', headers: header
           expect(response).to have_http_status 200
-          expect(json['data'].size).to eq(3)
+          expect(json['lists'].size).to eq(3)
         end
       end
     end
