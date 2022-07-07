@@ -14,43 +14,26 @@ describe 'toDo API lists' do
       response '200', 'return user`s lists' do
         schema type: :object,
           properties: {
-            data: {
+            lists: {
               type: :array,
               items: {
                 type: :object,
                 properties: {
                   id: { type: :string, example: '1' },
-                  type: { type: :string, example: 'lists' },
-                  attributes: {
-                    type: :object,
-                    properties: {
-                      name: { type: :string, example: "Doing" },
-                      n_position: { type: :integer, example: 2 }
-                    }
-                  },
-                  relationships: {
-                    type: :object,
-                    properties: {
-                      tasks: {
-                        type: :object,
-                        properties: {
-                          data: {
-                            type: :array,
-                            items: {
-                              type: :object,
-                              properties: {
-                                id: { type: :integer, example: 1 },
-                                name: { type: :string, example: "hola" },
-                                description: { type: :string, exmaple: "abc" },
-                                list_id: { type: :integer, example: 5},
-                                created_at: { type: :string, example: "2022-06-23T20:40:28.305Z" },
-                                updated_at: { type: :string, example: "2022-06-23T20:40:28.305Z" },
-                                user_id: { type: :integer, example: 2 } 
-                              }
-                            }
-                          }
-                        }
-                      } 
+                  name: { type: :string, example: "Doing" },
+                  n_position: { type: :integer, example: 2 },
+                  tasks: {
+                    type: :array,
+                    items: {
+                      type: :object,
+                      properties: {
+                        id: { type: :integer, example: 1 },
+                        name: { type: :string, example: "task 1" },
+                        description: { type: :string, exmaple: "abc" },
+                        list_id: { type: :integer, example: 5},
+                        created_at: { type: :string, example: "2022-06-23T20:40:28.305Z" },
+                        updated_at: { type: :string, example: "2022-06-23T20:40:28.305Z" }
+                      }
                     }
                   }
                 }

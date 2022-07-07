@@ -346,6 +346,17 @@
         "branches": {
         }
       },
+      "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/serializers/task_serializer.rb": {
+        "lines": [
+          null,
+          null,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
       "/Users/franciscocharris/Documents/ruby/exer/todo_list/server/app/serializers/user_serializer.rb": {
         "lines": [
           null,
@@ -379,6 +390,6 @@
         }
       }
     },
-    "timestamp": 1656105662
+    "timestamp": 1657233747
   }
 }
