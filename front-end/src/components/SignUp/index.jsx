@@ -24,7 +24,7 @@ export function SignUp() {
       lastName,
       email,
       password
-    } = e.target  
+    } = e.target
 
     axios.post('/signup', {
       first_name: firstName.value,
@@ -36,7 +36,7 @@ export function SignUp() {
       localStorage.setItem('token', JSON.stringify(response.data['token']) )
       // console.log('tokenn', localStorage.getItem('token'))
       // console.log('hola', response.data['token'])
-      console.log(response.data)
+      response.data
       setSuccess(true)
     })
     .catch(error => {
