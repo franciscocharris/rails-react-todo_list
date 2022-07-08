@@ -33,6 +33,9 @@ export function SignUp() {
       password: password.value
     })
     .then(response => {
+      localStorage.setItem('token', JSON.stringify(response.data['token']) )
+      // console.log('tokenn', localStorage.getItem('token'))
+      // console.log('hola', response.data['token'])
       console.log(response.data)
       setSuccess(true)
     })

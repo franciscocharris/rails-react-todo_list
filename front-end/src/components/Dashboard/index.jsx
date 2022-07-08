@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import axios from '../../config/axios'
 import { Board } from './Board'
 import { Modal } from './Modal'
 import { useState } from 'react'
@@ -24,7 +25,7 @@ const mock = {
       "id": 4,
       "title": "hola 3",
       "description": "string",
-      "status": "IN_PROGRESS",
+      "status": "DONE",
     }
   ]
 }
@@ -40,10 +41,16 @@ export function Dashboard() {
   console.log('isOpen', isOpen)
 
 
-
-
   useEffect(() => {
     // feching data
+    axios.get('/lists')
+    .then(response => {
+      console.log(response.data)
+    })
+    .catch(error => {
+      console.log('Error :',error.message)
+    })
+
     mock.data.forEach((task) => tasksSet.add(task.status))
     setColumns([...tasksSet])
     setTasks(mock.data)
