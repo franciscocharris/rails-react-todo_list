@@ -2,12 +2,16 @@
 
 module V1
   class TasksController < ApplicationController
-    before_action :find_task, except: %i[create index]
+    before_action :find_task, except: %i[create]
 
     def create
       @task = @current_user.tasks.new(task_params)
       @task.save!
       render json: { id: @task.id }, status: 201
+    end
+
+    def show
+      render json: @task, status: 200
     end
 
     def update
@@ -21,7 +25,7 @@ module V1
     private
 
     def find_task
-      @task = Task.find(params[:id])
+      @task = @current_user.tasks.find(params[:id])
     end
 
     def task_params

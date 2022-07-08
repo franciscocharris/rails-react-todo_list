@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2022-07-07T17:42:27-05:00">2022-07-07T17:42:27-05:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2022-07-08T10:51:10-05:00">2022-07-08T10:51:10-05:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,7 +23,7 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="red">
-  29.55%
+  29.78%
 </span>
 
      </span>
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>176</b> relevant lines,
-    <span class="green"><b>52</b> lines covered</span> and
-    <span class="red"><b>124</b> lines missed. </span>
+    <b>178</b> relevant lines,
+    <span class="green"><b>53</b> lines covered</span> and
+    <span class="red"><b>125</b> lines missed. </span>
     (<span class="red">
-  29.55%
+  29.78%
 </span>
 )
   </div>
@@ -127,11 +127,11 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#3386695292fc52464acad1b052cdc787ef5f4006" class="src_link" title="app/controllers/v1/tasks_controller.rb">app/controllers/v1/tasks_controller.rb</a></td>
-            <td class="red strong cell--number t-file__coverage">56.25 %</td>
-            <td class="cell--number">31</td>
-            <td class="cell--number">16</td>
-            <td class="cell--number">9</td>
-            <td class="cell--number">7</td>
+            <td class="red strong cell--number t-file__coverage">55.56 %</td>
+            <td class="cell--number">35</td>
+            <td class="cell--number">18</td>
+            <td class="cell--number">10</td>
+            <td class="cell--number">8</td>
             <td class="cell--number">0.56</td>
             
           </tr>
@@ -280,7 +280,7 @@
     <span class="group_name">Controllers</span>
     (<span class="covered_percent">
       <span class="red">
-  46.24%
+  46.32%
 </span>
 
      </span>
@@ -300,11 +300,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>93</b> relevant lines,
-    <span class="green"><b>43</b> lines covered</span> and
-    <span class="red"><b>50</b> lines missed. </span>
+    <b>95</b> relevant lines,
+    <span class="green"><b>44</b> lines covered</span> and
+    <span class="red"><b>51</b> lines missed. </span>
     (<span class="red">
-  46.24%
+  46.32%
 </span>
 )
   </div>
@@ -362,11 +362,11 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#3386695292fc52464acad1b052cdc787ef5f4006" class="src_link" title="app/controllers/v1/tasks_controller.rb">app/controllers/v1/tasks_controller.rb</a></td>
-            <td class="red strong cell--number t-file__coverage">56.25 %</td>
-            <td class="cell--number">31</td>
-            <td class="cell--number">16</td>
-            <td class="cell--number">9</td>
-            <td class="cell--number">7</td>
+            <td class="red strong cell--number t-file__coverage">55.56 %</td>
+            <td class="cell--number">35</td>
+            <td class="cell--number">18</td>
+            <td class="cell--number">10</td>
+            <td class="cell--number">8</td>
             <td class="cell--number">0.56</td>
             
           </tr>
@@ -2713,7 +2713,7 @@
     <h3>app/controllers/v1/tasks_controller.rb</h3>
     <h4>
       <span class="red">
-  56.25%
+  55.56%
 </span>
 
       lines covered
@@ -2722,9 +2722,9 @@
     
 
     <div class="t-line-summary">
-      <b>16</b> relevant lines.
-      <span class="green"><b>9</b> lines covered</span> and
-      <span class="red"><b>7</b> lines missed.</span>
+      <b>18</b> relevant lines.
+      <span class="green"><b>10</b> lines covered</span> and
+      <span class="red"><b>8</b> lines missed.</span>
     </div>
 
     
@@ -2785,7 +2785,7 @@
 
             
 
-            <code class="ruby">    before_action :find_task, except: %i[create index]</code>
+            <code class="ruby">    before_action :find_task, except: %i[create]</code>
           </li>
         </div>
       
@@ -2873,7 +2873,7 @@
 
             
 
-            <code class="ruby">    def update</code>
+            <code class="ruby">    def show</code>
           </li>
         </div>
       
@@ -2884,7 +2884,7 @@
 
             
 
-            <code class="ruby">      @task.update!(task_params)</code>
+            <code class="ruby">      render json: @task, status: 200</code>
           </li>
         </div>
       
@@ -2917,7 +2917,7 @@
 
             
 
-            <code class="ruby">    def destroy</code>
+            <code class="ruby">    def update</code>
           </li>
         </div>
       
@@ -2928,7 +2928,7 @@
 
             
 
-            <code class="ruby">      @task.destroy!</code>
+            <code class="ruby">      @task.update!(task_params)</code>
           </li>
         </div>
       
@@ -2961,12 +2961,34 @@
 
             
 
-            <code class="ruby">    private</code>
+            <code class="ruby">    def destroy</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="22">
+          <li class="missed" data-hits="0" data-linenumber="22">
+            
+            
+
+            
+
+            <code class="ruby">      @task.destroy!</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="23">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="24">
             
             
 
@@ -2977,35 +2999,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="23">
+          <li class="covered" data-hits="1" data-linenumber="25">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">    def find_task</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="24">
-            
-            
-
-            
-
-            <code class="ruby">      @task = Task.find(params[:id])</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="25">
-            
-            
-
-            
-
-            <code class="ruby">    end</code>
+            <code class="ruby">    private</code>
           </li>
         </div>
       
@@ -3027,7 +3027,7 @@
 
             
 
-            <code class="ruby">    def task_params</code>
+            <code class="ruby">    def find_task</code>
           </li>
         </div>
       
@@ -3038,7 +3038,7 @@
 
             
 
-            <code class="ruby">      params.permit(:id, :name, :description, :list_id)</code>
+            <code class="ruby">      @task = @current_user.tasks.find(params[:id])</code>
           </li>
         </div>
       
@@ -3060,12 +3060,56 @@
 
             
 
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="31">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    def task_params</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="32">
+            
+            
+
+            
+
+            <code class="ruby">      params.permit(:id, :name, :description, :list_id)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="33">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="34">
+            
+            
+
+            
+
             <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="31">
+          <li class="never" data-hits="" data-linenumber="35">
             
             
 

@@ -6,6 +6,7 @@ RSpec.describe V1::TasksController, type: :request do
   let!(:user) { create(:user, :to_logg) }
   let!(:token_user) { JwtServices::Encoder.call(id: user.id) }
   let(:header) { { 'Authorization': "Bearer #{token_user}" } }
+  let(:another_header) { { 'Authorization': "Bearer #{JwtServices::Encoder.call(id: create(:user).id)}" } }
   let(:correct_task_params) { attributes_for(:task, user_id: user.id, list_id: user.lists[0].id) }
   let!(:tasks) { create_list(:task, 3, user_id: user.id, list_id: user.lists[0].id) }
   let(:n_params) do
@@ -40,6 +41,23 @@ RSpec.describe V1::TasksController, type: :request do
           post '/v1/tasks', params: attributes_for(:task, :w_task), headers: header
         end.to change(Task, :count).by(0)
       }
+    end
+  end
+
+  describe 'GET /show' do
+    context 'the task id exists from user' do
+      it 'renders a successful response and return the task' do
+        get "/v1/tasks/#{tasks[0].id}", headers: header
+        expect(response).to have_http_status 200
+        expect(assigns(:task).name).to eq(tasks[0].name)
+      end
+    end
+
+    context 'the task`s id exists but, doesn`t belong to the user' do
+      it 'must return error record not found' do
+        get "/v1/tasks/#{tasks[0].id}", headers: another_header
+        expect(response).to have_http_status 401
+      end
     end
   end
 

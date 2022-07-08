@@ -5,6 +5,8 @@ describe 'toDo API tasks' do
   let(:list) { user.lists[0] }
   let(:token) { "Bearer #{JwtServices::Encoder.call(id: user.id)}" }
   let(:task) { create(:task, list_id: list.id) }
+  let!(:another_user) { create(:user) }
+  let(:another_task) { create(:task, user_id: another_user.id, list_id: another_user.lists[0].id) }
 
   path '/v1/tasks' do
 
@@ -51,6 +53,43 @@ describe 'toDo API tasks' do
   end
 
   path '/v1/tasks/{id}' do
+
+    get 'show task' do
+      tags 'tasks'
+      produces 'application/json'
+      security [JWT: []]
+      parameter name: :id, in: :path, type: :string
+
+      response '200', 'task returned' do
+        let(:id) { task.id }
+        let(:Authorization) { token }
+        schema type: :object,
+          properties: {
+            task: {
+              type: :object,
+              properties: {
+                id: { type: :integer, example: 1 },
+                name: { type: :string, example: "task 1" },
+                description: { type: :string, exmaple: "abc" },
+                list_id: { type: :integer, example: 5},
+                created_at: { type: :string, example: "2022-06-23T20:40:28.305Z" },
+                updated_at: { type: :string, example: "2022-06-23T20:40:28.305Z" }
+              }
+            }
+          }
+        run_test!
+      end
+
+      response '401', 'task not found or doesn`t belong to user logged' do
+        let(:id) { another_task.id }
+        let(:Authorization) { token }
+        schema type: :object,
+          properties: {
+            errors: { type: :string, example: "Couldn't find task with 'id'=123" }
+          }
+        run_test!
+      end
+    end
 
     patch 'update task' do
       tags 'tasks'
