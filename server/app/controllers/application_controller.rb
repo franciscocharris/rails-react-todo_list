@@ -1,19 +1,15 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
-  #
+  include MessageErrors
+
   class AutorizationError < StandardError; end
   class HeaderNotSent < StandardError; end
   class InvalidHeader < StandardError; end
-  #
-
   class AuthenticationError < StandardError; end
 
-  #
   rescue_from HeaderNotSent, with: :not_header
   rescue_from InvalidHeader, with: :invalid_header
-  #
-
   rescue_from AuthenticationError, with: :w_credentials
   rescue_from JWT::DecodeError, with: :error_handler
   rescue_from ActiveRecord::RecordNotFound, with: :error_handler
@@ -26,7 +22,7 @@ class ApplicationController < ActionController::API
     validate_request_header(request)
 
     header = request.headers[:Authorization]
-    header = header.split(' ').last
+    header = header.split.last
     @decoded = JwtServices::Decoder.call(header)
     @current_user = User.find(@decoded[:id])
   end
@@ -37,31 +33,5 @@ class ApplicationController < ActionController::API
     raise HeaderNotSent unless request.headers.key?('Authorization')
 
     raise InvalidHeader unless request.headers[:Authorization].include?('Bearer ')
-  end
-
-  #
-  def invalid_header
-    render json: { errors: 'authentication header has invalid format' }, status: 403
-  end
-
-  def not_header
-    render json: { errors: 'authentication header wasn`t sent' }, status: 403
-  end
-  #
-
-  def w_credentials
-    render json: { errors: 'wrong credentials' }, status: 401
-  end
-
-  def error_handler(err)
-    render json: { errors: err.message }, status: 401
-  end
-
-  def no_valid(err)
-    render json: { errors: err.record.errors.full_messages }, status: 422
-  end
-
-  def b_request(err)
-    render json: { errors: err.message }, status: 400
   end
 end

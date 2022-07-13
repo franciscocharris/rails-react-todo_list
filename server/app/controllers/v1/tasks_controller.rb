@@ -18,6 +18,10 @@ module V1
       @task.update!(task_params)
     end
 
+    def change_list
+      @task.update!(task_params[:list_id])
+    end
+
     def destroy
       @task.destroy!
     end

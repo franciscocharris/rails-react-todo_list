@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     resources :lists, except: %i[show] do
       post 'change_position', on: :member
     end
-    resources :tasks
+    resources :tasks do
+      post 'change_list', on: :member
+    end
   end
   get '/*a', to: 'application#not_found'
 end

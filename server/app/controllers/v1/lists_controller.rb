@@ -5,7 +5,7 @@ module V1
     before_action :find_list, except: %i[create index]
 
     def index
-      return render json: { errors: 'there`s no lists to show' }, status: 204 unless (@lists = @current_user.lists.all)
+      return render json: { errors: 'there`s no lists to show' }, status: 204 unless (@lists = @current_user.lists)
 
       render json: @lists, status: 200
     end

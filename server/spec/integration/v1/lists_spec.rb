@@ -2,6 +2,8 @@ require 'swagger_helper'
 
 describe 'toDo API lists' do
   let!(:user) { create(:user, :to_logg) }
+  let!(:another_user) { build(:user) }
+  let(:another_token) { "Bearer #{JwtServices::Encoder.call(id: 2)}" }
   let(:token) { "Bearer #{JwtServices::Encoder.call(id: user.id)}" }
 
   path '/v1/lists' do
@@ -19,7 +21,7 @@ describe 'toDo API lists' do
               items: {
                 type: :object,
                 properties: {
-                  id: { type: :string, example: '1' },
+                  id: { type: :integer, example: 1 },
                   name: { type: :string, example: "Doing" },
                   n_position: { type: :integer, example: 2 },
                   tasks: {
@@ -65,7 +67,7 @@ describe 'toDo API lists' do
       end
 
       response '204', 'the user has no lists to show' do
-        let(:Authorization) { token }
+        let(:Authorization) { another_token }
         schema type: :object,
           properties: {
             errors: { type: :string, example: 'there`s no lists to show' }
