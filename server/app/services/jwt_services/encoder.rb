@@ -2,12 +2,12 @@
 
 module JwtServices
   class Encoder < ApplicationService
-    def initialize(payload)
-      @payload = payload
+    def initialize(user_id)
+      @payload = user_id
     end
 
     def call
-      JWT.encode @payload, ENV['SECRET_KEY'], 'HS256'
+      JWT.encode @payload, ENV.fetch('SECRET_KEY', nil), 'HS256'
     end
   end
 end

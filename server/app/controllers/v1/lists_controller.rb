@@ -5,7 +5,8 @@ module V1
     before_action :find_list, except: %i[create index]
 
     def index
-      return render json: { errors: 'there`s no lists to show' }, status: 204 unless (@lists = @current_user.lists.all)
+      @msg = 'there`s no lists to show'
+      return render json: { errors: @msg }, status: 204 unless (@lists = @current_user.lists)
 
       render json: @lists, status: 200
     end
@@ -18,10 +19,6 @@ module V1
 
     def update
       @list.update!(list_params)
-    end
-
-    def change_position
-      @list.update_attribute(:n_position, list_params[:n_position])
     end
 
     def destroy

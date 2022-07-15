@@ -2,6 +2,8 @@ require 'swagger_helper'
 
 describe 'toDo API lists' do
   let!(:user) { create(:user, :to_logg) }
+  let!(:another_user) { build(:user) }
+  let(:another_token) { "Bearer #{JwtServices::Encoder.call(id: 2)}" }
   let(:token) { "Bearer #{JwtServices::Encoder.call(id: user.id)}" }
 
   path '/v1/lists' do
@@ -19,7 +21,7 @@ describe 'toDo API lists' do
               items: {
                 type: :object,
                 properties: {
-                  id: { type: :string, example: '1' },
+                  id: { type: :integer, example: 1 },
                   name: { type: :string, example: "Doing" },
                   n_position: { type: :integer, example: 2 },
                   tasks: {
@@ -62,15 +64,6 @@ describe 'toDo API lists' do
             }
           run_test!
         end
-      end
-
-      response '204', 'the user has no lists to show' do
-        let(:Authorization) { token }
-        schema type: :object,
-          properties: {
-            errors: { type: :string, example: 'there`s no lists to show' }
-          }
-        run_test!
       end
     end
 
@@ -229,40 +222,6 @@ describe 'toDo API lists' do
           }
         run_test!
       end
-    end
-  end
-
-  path '/v1/lists/{id}/change_position' do
-    post 'update the position of list' do
-      tags 'lists'
-      produces 'application/json'
-      security [JWT: []]
-      parameter name: :id, in: :path, type: :string
-      parameter name: :n_position, in: :body, schema: {
-        type: :object,
-        properties: {
-          n_position: { type: :integer, example: 5 }
-        },
-        required: ['n_position']
-      }
-
-      response '204', 'list updated - without response returned' do
-        let(:id) { create(:list, n_position: user.lists.count+1, user_id: user.id).id }
-        let(:Authorization) { token }
-        let(:n_position) { 5 }
-        run_test!
-      end
-
-      response '401', 'list not found' do
-        let(:id) { 123 }
-        let(:Authorization) { token }
-        schema type: :object,
-          properties: {
-            errors: { type: :string, example: "Couldn't find List with 'id'= #{123}" }
-          }
-        run_test!
-      end
-
     end
   end
 end

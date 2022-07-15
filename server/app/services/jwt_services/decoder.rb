@@ -7,7 +7,8 @@ module JwtServices
     end
 
     def call
-      decoded_token = JWT.decode(@token, ENV['SECRET_KEY'], true, { algorithm: 'HS256' })[0]
+      decoded_token = JWT.decode(@token, ENV.fetch('SECRET_KEY', nil), true,
+                                 { algorithm: 'HS256' })[0]
       HashWithIndifferentAccess.new decoded_token
     end
   end

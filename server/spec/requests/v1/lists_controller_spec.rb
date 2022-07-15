@@ -46,8 +46,10 @@ RSpec.describe V1::ListsController, type: :request do
 
   describe 'POST/ create' do
     context 'when the params are correct' do
+      let!(:list_params) { attributes_for(:list, n_position: user.lists.count+1) }
+      let!(:request) { post '/v1/lists', params: list_params, headers: header }
       it do
-        post '/v1/lists', params: attributes_for(:list, n_position: user.lists.count+1, user_id: user.id), headers: header
+        request
         expect(response).to have_http_status 201
       end
 
@@ -85,13 +87,6 @@ RSpec.describe V1::ListsController, type: :request do
         patch "/v1/lists/#{user.lists[0].id}", params: attributes_for(:list, :w_list), headers: header
         expect(response).to have_http_status 422
       end
-    end
-  end
-
-  describe 'POST/ change_position' do
-    it do
-      post "/v1/lists/#{user.lists[0].id}/change_position", params: { n_position: 2 }, headers: header
-      expect(user.lists[0].reload.n_position).to eq(2)
     end
   end
 

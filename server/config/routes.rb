@@ -3,7 +3,6 @@
 Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
-  # root ''
   namespace :v1 do
     post 'signup', to: 'sessions#signup'
     post 'login', to: 'sessions#login'
