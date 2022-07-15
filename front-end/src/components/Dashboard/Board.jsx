@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 import Trello from 'react-trello'
 
 const INITIAL_STATE = { lanes: [] }
@@ -8,18 +8,20 @@ export function Board({ columns = [], tasks = [] }) {
 
   useEffect(() => {
     if (eventBus && tasks.length) {
+
       const updatedLines = columns.reduce((acc, cur) => {
-        const cards = tasks.filter((item) => item.status === cur)
+        const [id, title] = cur
+        const cards = tasks.filter((item) => item.list_id === id)
         acc.lanes.push({
-          id: cur,
-          title: cur,
+          id,
+          title,
           style: { backgroundColor: '#f3f1f1' },
           cards
         })
-        
-        return acc
-      }, { lanes: [] })
 
+        return acc
+
+      }, { lanes: [] })
 
       eventBus.publish({type: 'REFRESH_BOARD', data: updatedLines})
     }

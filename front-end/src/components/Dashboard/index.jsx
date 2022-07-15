@@ -32,30 +32,34 @@ const mock = {
 
 
 const tasksSet = new Set()
+const tasksMap = new Map()
+const _tasks = []
 
 export function Dashboard() {
   const [isOpen, setIsOpen] = useState(false)
   const [tasks, setTasks] = useState([])
   const [columns, setColumns] = useState([])
   const modalRoot = document.getElementById('modal-root')
-  console.log('isOpen', isOpen)
 
 
   useEffect(() => {
-    // feching data
     axios.get('/lists')
-    .then(response => {
-      console.log(response.data)
-    })
-    .catch(error => {
-      console.log('Error :',error.message)
-    })
+      .then(response => {         
+        const lists = response?.data?.lists || []
+        const _tasks = lists.reduce((acc, cur) => {
+          acc = [...acc, ...cur?.tasks]
+          return acc
+        }, [])
 
-    mock.data.forEach((task) => tasksSet.add(task.status))
-    setColumns([...tasksSet])
-    setTasks(mock.data)
+        lists.forEach((task) => tasksMap.set(task.id, task.name))
 
-  }, [mock.data])
+        setColumns([...tasksMap])
+        setTasks(_tasks)
+      })
+      .catch(error => {
+        console.log('Error :',error.message)
+      })   
+  }, [])
 
   return (
     <>
