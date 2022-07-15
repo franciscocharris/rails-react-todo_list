@@ -38,8 +38,8 @@ Layout/TrailingWhitespace:
 Layout/FirstHashElementLineBreak:
   Enabled: true
 
-Layout/LineLength:
-  Max: 90
+# Layout/LineLength:
+#   Max: 90
 
 Layout/MultilineHashBraceLayout:
   EnforcedStyle: new_line

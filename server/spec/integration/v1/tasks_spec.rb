@@ -69,7 +69,7 @@ describe 'toDo API tasks' do
               type: :object,
               properties: {
                 id: { type: :integer, example: 1 },
-                name: { type: :string, example: "task 1" },
+                tittle: { type: :string, example: "task 1" },
                 description: { type: :string, exmaple: "abc" },
                 list_id: { type: :integer, example: 5},
                 created_at: { type: :string, example: "2022-06-23T20:40:28.305Z" },

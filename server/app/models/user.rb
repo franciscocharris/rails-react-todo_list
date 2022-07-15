@@ -5,18 +5,6 @@ class User < ApplicationRecord
   has_many :lists, dependent: :destroy
   has_many :tasks, dependent: :destroy
 
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :email, presence: true,
-                    uniqueness: true,
-                    format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, presence: true,
-                       length: { minimum: 6 },
-                       if: -> { new_record? || !password.nil? }
-
-  before_save { self.email = email.downcase.delete(' ') }
-  after_save :create_default_lists
-
   LISTS_DATA = [
     { name: 'To Do', n_position: 1 },
     { name: 'Doing', n_position: 2 },
@@ -29,5 +17,15 @@ class User < ApplicationRecord
     end
   end
 
-  scope :get_list, -> { lists }
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, presence: true,
+                    uniqueness: true,
+                    format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :password, presence: true,
+                       length: { minimum: 6 },
+                       if: -> { new_record? || !password.nil? }
+
+  before_save { self.email = email.downcase.delete(' ') }
+  after_save :create_default_lists
 end
