@@ -1,0 +1,9 @@
+.messageFailure{
+  display: flex;
+  justify-content: center;
+  border: 1px solid ;
+  margin-top: 20px;
+  font-size: 13px;
+  color: #fca5a5;
+  border-color: #fca5a5;
+}

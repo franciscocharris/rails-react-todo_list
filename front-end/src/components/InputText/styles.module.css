@@ -1,0 +1,16 @@
+.input{
+  margin-top: 10px;
+  color: #999a9f;
+  height: 40px;
+  outline: none;
+  background-color: transparent;
+  border-radius: 5px;
+  border: 1px solid #999a9f;
+  padding-left: 10px;
+}
+.messageError{
+  display:flex;
+  color: #d87575;
+  font-size: 13px;
+}
+
