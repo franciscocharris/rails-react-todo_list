@@ -23,6 +23,7 @@ export function Board({ columns = [], tasks = [] }) {
 
       }, { lanes: [] })
 
+     
       eventBus.publish({type: 'REFRESH_BOARD', data: updatedLines})
     }
   }, [tasks, eventBus])

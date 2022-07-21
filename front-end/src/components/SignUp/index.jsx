@@ -34,8 +34,6 @@ export function SignUp() {
     })
     .then(response => {
       localStorage.setItem('token', JSON.stringify(response.data['token']) )
-      // console.log('tokenn', localStorage.getItem('token'))
-      // console.log('hola', response.data['token'])
       response.data
       setSuccess(true)
     })
